@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"E:\code\hrsystem\public/../application/admin\view\structure\lists.html";i:1528103627;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"E:\code\hrsystem\public/../application/admin\view\typeworks\lists.html";i:1616481220;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -25,12 +25,12 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <!-- Example Events -->
-                        <form action="<?php echo url('Structure/delall'); ?>" method="post">
+                        <form action="<?php echo url('Typeworks/delall'); ?>" method="post">
                             <div class="example-wrap">
                                 <h4 class="example-title">组织管理 <a class="btn btn-outline btn-rounded btn-sm btn-info"  href="<?php echo url('lists'); ?>">刷新</a></h4>
                                 <div class="example">
                                     <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                        <a class="btn btn-primary" href="<?php echo url('Structure/add'); ?>" style="color:#fff;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加组织</a>
+                                        <a class="btn btn-primary" href="<?php echo url('Typeworks/add'); ?>" style="color:#fff;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加组织</a>
                                         <button style="margin-left: 10px;" type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> 批量删除</button>
                                     </div>
                                     <table class="table table-bordered" >
@@ -44,15 +44,15 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        <?php if(is_array($structure) || $structure instanceof \think\Collection || $structure instanceof \think\Paginator): $i = 0; $__LIST__ = $structure;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($i % 2 );++$i;?>
+                                        <tbody>  <!--此处声明$value的值-->
+                                        <?php if(is_array($typeworks) || $typeworks instanceof \think\Collection || $typeworks instanceof \think\Paginator): $i = 0; $__LIST__ = $typeworks;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($i % 2 );++$i;?>
                                             <tr id="<?php echo $value['id']; ?>" pid="<?php echo $value['pid']; ?>" >
                                                 <td width="5%"><input type="checkbox" name="itm[]" value="<?php echo $value['id']; ?>"></td>
 
                                                 <td width="5%"><a  class="showHide btn btn-xs btn-outline btn-warning" style="font-size: 14px; font-weight: bold" >+</a></td>
                                                 <td >
-                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="<?php echo url('Content/lists',['structure_id'=>$value['id']]); ?>"><?php echo $value['typename']; ?></a>
-                                                    <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="<?php echo url('add',array('id'=>$value['id'])); ?>">添加子组织</a>
+                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="<?php echo url('Content/lists',['structure_id'=>$value['id']]); ?>"><?php echo $value['positionname']; ?></a>
+                                                    <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="<?php echo url('add',array('id'=>$value['id'])); ?>">添加子组织</a>  <!--增加-->
                                                 </td>
                                                 <td width="13%">
                                                     <input class="form-control" type="number" valid="<?php echo $value['id']; ?>"  name="sort" value="<?php echo $value['sort']; ?>" onchange="change(this);">

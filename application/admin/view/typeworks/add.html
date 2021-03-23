@@ -55,7 +55,13 @@
                                                 <br class="form-group">
                                                 <label class="col-sm-1 control-label">年资选择：</label>
                                                 <div class="form-submit">
-                                                    <input type="text" class="input-text" value="" placeholder="" id="workingageid" name="workingage">
+                                                    <select id="workingageid" name="workingage"  >
+                                                        <option>請選擇年资：</option>
+                                                        <option value="2">2年内 </option> //选择"2年内",系统返回值"2"
+                                                        <option value="5">2年-5年</option>
+                                                        <option value="7">5年以上</option>
+                                                    </select>
+<!--                                                    <input type="text" class="input-text" type="post" value="" placeholder="" id="workingageid" name="workingage">-->
                                                 </div>
                                                 <br>
 
@@ -63,7 +69,7 @@
                                                 <br class="form-group">
                                                 <label class="col-sm-1 control-label">等级选择：</label>
                                                 <div class="form-submit">
-                                                    <input type="text" class="input-text" value="" placeholder="" id="levelid" name="levelname">
+                                                    <input type="text" class="input-text" value="SG1-1" placeholder="" id="levelid" name="levelname">
                                                 </div>
                                                 <br>
 
@@ -71,7 +77,14 @@
                                                 <br class="form-group">
                                                 <label class="col-sm-1 control-label">ABC等级选择：</label>
                                                 <div class="form-submit">
-                                                    <input type="text" class="input-text" value="" placeholder="" id="abclevelid" name="abclevelname">
+                                                        <select id="abclevelid" name="abclevelname"  >
+                                                            <option>請選擇ABC：</option>
+                                                            <option value="A">A级 </option> //选择"A级",系统返回值"A"
+                                                            <option value="B">B级 </option>
+                                                            <option value="C">C级 </option>
+
+                                                        </select>
+<!--                                                    <input type="text" class="input-text" value="" placeholder="" id="abclevelid" name="abclevelname">-->
                                                 </div>
                                                     <br>
 
@@ -85,35 +98,36 @@
 
                                                     </div>
 
-                                                <div class="tab-pane" id="tab-3">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-1 control-label">
-                                                            <a onclick="addabcsalary(this);" href="#" style="margin-right: 10px"> [ + ] </a>  <!--按+增加种类-->
-                                                            等级选择：
-                                                        </label>
-                                                        <div class="col-sm-11">
-                                                            <input  name="content[]" type="text" class="form-control" aria-required="true">
-                                                        </div>
-                                                        <div style="padding-top: 45px">
-                                                            <label class="col-sm-1 control-label">年资选择</label>
-                                                            <div class="col-sm-11">
-                                                                <input  name="sanctions[]" type="text" class="form-control" aria-required="true">
-                                                            </div>
-                                                        </div>
-                                                        <div style="padding-top: 45px">
-                                                            <label class="col-sm-1 control-label">ABC薪资</label>
-                                                            <div class="col-sm-11">
-                                                                <input  name="score[]" type="text" class="form-control" aria-required="true">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+<!--                                                按+号增加分类-->
+<!--                                                <div class="tab-pane" id="tab-3">-->
+<!--                                                    <div class="form-group">-->
+<!--                                                        <label class="col-sm-1 control-label">-->
+<!--                                                            <a onclick="addabcsalary(this);" href="#" style="margin-right: 10px"> [ + ] </a>  &lt;!&ndash;按+增加种类&ndash;&gt;-->
+<!--                                                            等级选择：-->
+<!--                                                        </label>-->
+<!--                                                        <div class="col-sm-11">-->
+<!--                                                            <input  name="content[]" type="text" class="form-control" aria-required="true">-->
+<!--                                                        </div>-->
+<!--                                                        <div style="padding-top: 45px">-->
+<!--                                                            <label class="col-sm-1 control-label">年资选择</label>-->
+<!--                                                            <div class="col-sm-11">-->
+<!--                                                                <input  name="sanctions[]" type="text" class="form-control" aria-required="true">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                        <div style="padding-top: 45px">-->
+<!--                                                            <label class="col-sm-1 control-label">ABC薪资</label>-->
+<!--                                                            <div class="col-sm-11">-->
+<!--                                                                <input  name="score[]" type="text" class="form-control" aria-required="true">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
 
                                                     <label class="col-sm-1 control-label">职务分类：</label>
                                                     <div class="col-sm-2">
                                                         <select id="province" name="pid" class="form-control m-b help-block m-b-none" required="" aria-required="true">
                                                          {foreach $typeworks as $vo}
-                                                            <option value="{$vo.id}" >{$vo.level}级&nbsp;{$vo.name}</option>
+                                                            <option value="{$vo.id}" >{$vo.level}级&nbsp;{$vo.positionname}</option>
                                                             {/foreach}
 
                                                         </select>

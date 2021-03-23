@@ -24,12 +24,12 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <!-- Example Events -->
-                        <form action="{:url('Structure/delall')}" method="post">
+                        <form action="{:url('Typeworks/delall')}" method="post">
                             <div class="example-wrap">
                                 <h4 class="example-title">组织管理 <a class="btn btn-outline btn-rounded btn-sm btn-info"  href="{:url('lists')}">刷新</a></h4>
                                 <div class="example">
                                     <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                        <a class="btn btn-primary" href="{:url('Structure/add')}" style="color:#fff;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加组织</a>
+                                        <a class="btn btn-primary" href="{:url('Typeworks/add')}" style="color:#fff;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加组织</a>
                                         <button style="margin-left: 10px;" type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> 批量删除</button>
                                     </div>
                                     <table class="table table-bordered" >
@@ -43,15 +43,15 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        {volist name='structure' id='value'}
+                                        <tbody>  <!--此处声明$value的值-->
+                                        {volist name='typeworks' id='value'}
                                             <tr id="{$value.id}" pid="{$value.pid}" >
                                                 <td width="5%"><input type="checkbox" name="itm[]" value="{$value.id}"></td>
 
                                                 <td width="5%"><a  class="showHide btn btn-xs btn-outline btn-warning" style="font-size: 14px; font-weight: bold" >+</a></td>
                                                 <td >
-                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="{:url('Content/lists',['structure_id'=>$value['id']])}">{$value.typename}</a>
-                                                    <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="{:url('add',array('id'=>$value.id))}">添加子组织</a>
+                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="{:url('Content/lists',['structure_id'=>$value['id']])}">{$value.positionname}</a>
+                                                    <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="{:url('add',array('id'=>$value.id))}">添加子组织</a>  <!--增加-->
                                                 </td>
                                                 <td width="13%">
                                                     <input class="form-control" type="number" valid="{$value.id}"  name="sort" value="{$value.sort}" onchange="change(this);">
