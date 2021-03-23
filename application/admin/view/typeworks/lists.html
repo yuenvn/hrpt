@@ -50,7 +50,7 @@
 
                                                 <td width="5%"><a  class="showHide btn btn-xs btn-outline btn-warning" style="font-size: 14px; font-weight: bold" >+</a></td>
                                                 <td >
-                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="{:url('Content/lists',['structure_id'=>$value['id']])}">{$value.positionname}</a>
+                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="{:url('Content/lists',['typeworks_id'=>$value['id']])}">{$value.positionname}</a>
                                                     <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="{:url('add',array('id'=>$value.id))}">添加子组织</a>  <!--增加-->
                                                 </td>
                                                 <td width="13%">
@@ -58,7 +58,7 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-outline btn-rounded btn-primary" href="{:url('edit',array('id'=>$value['id']))}">编辑</a>
-                                                    <a class="btn btn-outline btn-rounded btn-danger" style="margin-left: 3%" structureid="{$value.id}" onclick="dele(this);">删除</a>
+                                                    <a class="btn btn-outline btn-rounded btn-danger" style="margin-left: 3%" typeworksid="{$value.id}" onclick="dele(this);">删除</a>
                                                 </td>
                                             </tr>
                                         {/volist}
@@ -109,7 +109,7 @@
                     type:"post",
                     dataType:"json",
                     data:{id:id},
-                    url:"{:url('Structure/isShowHidden')}",
+                    url:"{:url('Typeworks/isShowHidden')}",
                     success:function(data){
                         var sonids=[];
                         var idsobj=$('tr[pid!=0]');
@@ -141,7 +141,7 @@
                 type:"post",
                 dataType:"json",
                 data:{valid:valid},
-                url:"{:url('Structure/status')}",
+                url:"{:url('Typeworks/status')}",
                 success:function(data){
                     if(data==0){
                         $(obj).attr("class","btn btn-default");
@@ -164,7 +164,7 @@
                 type:"post",
                 dataType:"json",
                 data:{valid:valid,datass:datass},
-                url:"{:url('Structure/sort')}",
+                url:"{:url('Typeworks/sort')}",
                 success:function(data){
                     if(data==1){
                         layer.msg(' 更新排序成功！', {
@@ -184,7 +184,7 @@
 
         //删除
         function dele(object){
-            var structureid=$(object).attr("structureid");
+            var typeworksid=$(object).attr("typeworksid");
             layer.confirm('您确定要删除该条记录吗？', {
                 title: false,
                 closeBtn: false,
@@ -194,8 +194,8 @@
                 $.ajax({
                     type:"post",
                     dataType:"json",
-                    data:{structureid:structureid},
-                    url:"{:url('Structure/del')}",
+                    data:{typeworksid:typeworksid},
+                    url:"{:url('Typeworks/del')}",
                     success:function(data){
                         if(data){
                             layer.msg('删除记录成功', {

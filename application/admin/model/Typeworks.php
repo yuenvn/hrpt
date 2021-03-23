@@ -1,13 +1,13 @@
 <?php
 namespace app\admin\Model;
 
+use think\Loader;
 use think\Model;
 
 class Typeworks extends Model
 {
  //越盾分隔符
-
-            function currency_format($number, $suffix = 'đ') {
+    public function currency_format($number, $suffix = 'đ') {
                 if (!empty($number)) {
                     return number_format($number, 0, ',', '.') . "{$suffix}";
                 }
@@ -34,12 +34,21 @@ class Typeworks extends Model
         }
         return $arr;
     }
+    public function childrenids($structureid){
+        $data=$this->field('id,pid')->select();
+        return $this->_childrenids($data,$structureid);
+    }
+    private function _childrenids($data,$structureid){
+        static $arr=array();
+        foreach ($data as $k=>$v){
+            if($v["pid"]==$structureid){
+                $arr[]=$v["id"];
+                $this->_childrenids($data,$v["id"]);
+            }
+        }
+        return $arr;
+    }
 
-//    public function catetree($cateRes)
-//    {
-//        return $this->sort($cateRes);
-//    }
-//
 }
 
 

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"E:\code\hrsystem\public/../application/admin\view\typeworks\lists.html";i:1616488807;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"E:\code\hrsystem\public/../application/admin\view\structure\lists.html";i:1528103627;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -25,12 +25,12 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <!-- Example Events -->
-                        <form action="<?php echo url('Typeworks/delall'); ?>" method="post">
+                        <form action="<?php echo url('Structure/delall'); ?>" method="post">
                             <div class="example-wrap">
                                 <h4 class="example-title">组织管理 <a class="btn btn-outline btn-rounded btn-sm btn-info"  href="<?php echo url('lists'); ?>">刷新</a></h4>
                                 <div class="example">
                                     <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                        <a class="btn btn-primary" href="<?php echo url('Typeworks/add'); ?>" style="color:#fff;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加组织</a>
+                                        <a class="btn btn-primary" href="<?php echo url('Structure/add'); ?>" style="color:#fff;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加组织</a>
                                         <button style="margin-left: 10px;" type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> 批量删除</button>
                                     </div>
                                     <table class="table table-bordered" >
@@ -44,22 +44,22 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody>  <!--此处声明$value的值-->
-                                        <?php if(is_array($typeworks) || $typeworks instanceof \think\Collection || $typeworks instanceof \think\Paginator): $i = 0; $__LIST__ = $typeworks;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($i % 2 );++$i;?>
+                                        <tbody>
+                                        <?php if(is_array($structure) || $structure instanceof \think\Collection || $structure instanceof \think\Paginator): $i = 0; $__LIST__ = $structure;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($i % 2 );++$i;?>
                                             <tr id="<?php echo $value['id']; ?>" pid="<?php echo $value['pid']; ?>" >
                                                 <td width="5%"><input type="checkbox" name="itm[]" value="<?php echo $value['id']; ?>"></td>
 
                                                 <td width="5%"><a  class="showHide btn btn-xs btn-outline btn-warning" style="font-size: 14px; font-weight: bold" >+</a></td>
                                                 <td >
-                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="<?php echo url('Content/lists',['typeworks_id'=>$value['id']]); ?>"><?php echo $value['positionname']; ?></a>
-                                                    <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="<?php echo url('add',array('id'=>$value['id'])); ?>">添加子组织</a>  <!--增加-->
+                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="<?php echo url('Content/lists',['structure_id'=>$value['id']]); ?>"><?php echo $value['typename']; ?></a>
+                                                    <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="<?php echo url('add',array('id'=>$value['id'])); ?>">添加子组织</a>
                                                 </td>
                                                 <td width="13%">
                                                     <input class="form-control" type="number" valid="<?php echo $value['id']; ?>"  name="sort" value="<?php echo $value['sort']; ?>" onchange="change(this);">
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-outline btn-rounded btn-primary" href="<?php echo url('edit',array('id'=>$value['id'])); ?>">编辑</a>
-                                                    <a class="btn btn-outline btn-rounded btn-danger" style="margin-left: 3%" typeworksid="<?php echo $value['id']; ?>" onclick="dele(this);">删除</a>
+                                                    <a class="btn btn-outline btn-rounded btn-danger" style="margin-left: 3%" structureid="<?php echo $value['id']; ?>" onclick="dele(this);">删除</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; endif; else: echo "" ;endif; ?>
@@ -110,7 +110,7 @@
                     type:"post",
                     dataType:"json",
                     data:{id:id},
-                    url:"<?php echo url('Typeworks/isShowHidden'); ?>",
+                    url:"<?php echo url('Structure/isShowHidden'); ?>",
                     success:function(data){
                         var sonids=[];
                         var idsobj=$('tr[pid!=0]');
@@ -142,7 +142,7 @@
                 type:"post",
                 dataType:"json",
                 data:{valid:valid},
-                url:"<?php echo url('Typeworks/status'); ?>",
+                url:"<?php echo url('Structure/status'); ?>",
                 success:function(data){
                     if(data==0){
                         $(obj).attr("class","btn btn-default");
@@ -165,7 +165,7 @@
                 type:"post",
                 dataType:"json",
                 data:{valid:valid,datass:datass},
-                url:"<?php echo url('Typeworks/sort'); ?>",
+                url:"<?php echo url('Structure/sort'); ?>",
                 success:function(data){
                     if(data==1){
                         layer.msg(' 更新排序成功！', {
@@ -185,7 +185,7 @@
 
         //删除
         function dele(object){
-            var typeworksid=$(object).attr("typeworksid");
+            var structureid=$(object).attr("structureid");
             layer.confirm('您确定要删除该条记录吗？', {
                 title: false,
                 closeBtn: false,
@@ -195,8 +195,8 @@
                 $.ajax({
                     type:"post",
                     dataType:"json",
-                    data:{typeworksid:typeworksid},
-                    url:"<?php echo url('Typeworks/del'); ?>",
+                    data:{structureid:structureid},
+                    url:"<?php echo url('Structure/del'); ?>",
                     success:function(data){
                         if(data){
                             layer.msg('删除记录成功', {

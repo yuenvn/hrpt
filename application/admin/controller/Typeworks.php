@@ -19,6 +19,28 @@ class Typeworks extends Common
         ));
         return view();
     }
+    public function isShowHidden()  //展开与收缩
+    {
+        $id=input('id');
+        $sonIds=Loader::model('typeworks')->childrenids($id);
+        echo json_encode($sonIds);
+    }
+    //排序
+    public function sort()
+    {
+        if(request()->isAjax()){
+            $id= input('valid');
+            $datass['sort']=input('datass');
+            $sort=db('typeworks')->where('id',$id)->update($datass);
+            if($sort){
+                echo 1;
+            }else{
+                echo 0;
+            }
+        }else{
+            $this->error("警告：非法访问！",url('lists'));
+        }
+    }
 
   public function add()
   {
