@@ -13,9 +13,17 @@ class Typeworks extends Common
         //链表查询
         $_typeworks=db('typeworks')->alias('a')->order('sort asc')->select();
         $typeworks=Loader::model('typeworks')->catetree($_typeworks);
+//        dump($typeworks);
+//        die();
 
+        foreach ($typeworks as $key => $value) {
+            $typeworks[$key]['basicsalary'] =Loader::model('typeworks')->currency_format($typeworks[$key]['basicsalary']);
+        }
+
+//        $currency_format=Loader::model('typeworks')->currency_format('$vnd');
         $this->assign(array(
             'typeworks'=>$typeworks,
+//            'currency_format'=>$currency_format,
         ));
         return view();
     }
@@ -54,7 +62,7 @@ class Typeworks extends Common
       $_typeworks=db('typeworks')->field("*,concat(path,',',id) as paths")->order('paths')->select(); //取数据库值
 
       foreach ($_typeworks as $k=>$v){
-          $_typeworks[$k]['positionname']=str_repeat("|------",$v['level']).$v['positionname'].$v['codelevel'];
+          $_typeworks[$k]['position']=str_repeat("|------",$v['level']).$v['position'].$v['codelevel'];
       }
  //     dump($_typeworks);
 //      die();
@@ -69,11 +77,11 @@ class Typeworks extends Common
 
 //      $data['name']=$data['name'];
 //      $data['pid']=$data['pid'];
-      $data['name'];
-      $data['pid'];
-      $getpath=db('typeworks')->field('path')->find($data['pid']);
-      $data['path']=$getpath['path'];
-      $data['level']=substr_count($data['path'],',');
+//      $data['name'];
+//      $data['pid'];
+//      $getpath=db('typeworks')->field('path')->find($data['pid']);
+//      $data['path']=$getpath['path'];
+//      $data['level']=substr_count($data['path'],',');
 
       $res=db('typeworks')->insert($data);
 //      var_dump($getpath);
@@ -83,6 +91,42 @@ class Typeworks extends Common
           $this->error('添加失败','add');
       }
   }
+    public function edit()
+    {
+        if(request()->isPost()){
+            $data=input('post.');
+            $_data=array();
+            foreach($data as $k=>$v){
+                $_data[]=$k;
+            }
+
+            $validate=validate('typeworks');
+            if(!$validate->scene('edit')->check($data)){
+                $this->error($validate->getError());
+            }
+            if($data['id']==$data['pid']){
+                $this->error("选择错误，当前与上级组织相同！");
+            }
+            $edit=db('typeworks')->where('id',$id)->update($data);
+            if($edit){
+                $this->success("修改组织成功",url('lists'));
+            }else{
+                $this->error("修改组织失败");
+            }
+        }
+        //获取组织
+        $id=input('id');
+        $typeworks=Loader::model('typeworks')->catetreeadd();
+        $rs=db('typeworks')->find($id);
+        //获取模型ID
+        $model=db('model')->field('id,model_name')->select();
+        $this->assign(array(
+            'typeworks'=>$typeworks,
+            'model'=>$model,
+            'rs'=>$rs,
+        ));
+        return view();
+    }
     public function delall(){
         $data=input('post.');
         if(@$data['itm']){

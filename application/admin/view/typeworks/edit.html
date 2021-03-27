@@ -39,8 +39,8 @@
                                                     <div class="col-sm-11">
                                                         <select class="form-control m-b" required="" name="pid">
                                                             <option value="0">顶级组织</option>
-                                                            {volist name="structure" id="val"}
-                                                            <option {if condition="$rs.pid eq $val.id"} selected="selected" {/if} value="{$val.id}"><?php echo str_repeat(' ∷ ',$val['level']*1);  ?>{$val.typename}</option>
+                                                            {volist name="typeworks" id="val"}
+                                                            <option {if condition="$rs.pid eq $val.id"} selected="selected" {/if} value="{$val.id}"><?php echo str_repeat(' ∷ ',$val['level']*1);  ?>{$val.position}</option>
                                                             {/volist}
 
                                                         </select>
@@ -48,9 +48,9 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="col-sm-1 control-label">组织名称</label>
+                                                    <label class="col-sm-1 control-label">职位名称</label>
                                                     <div class="col-sm-11">
-                                                        <input  name="typename" value="{$rs.typename}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
+                                                        <input  name="position" value="{$rs.position}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
                                                     </div>
                                                 </div>
 
@@ -127,7 +127,7 @@
     $(function() {
         $('#file_upload').uploadify({
             'swf'      : '__PLUS__/uploadify/uploadify.swf',
-            'uploader' : '{:url("Structure/upimg")}',
+            'uploader' : '{:url("Typeworks/upimg")}',
             'progressData':'speed',
             'buttonText':'上传文件',
             'buttonClass':'fa fa-upload btn-sm btn btn-danger ',
@@ -137,11 +137,11 @@
             'fileObjName':'img',
             'onUploadSuccess':function(file,data,response){
                 $("input[name='img']").val(data);
-                var structure="__UPLOADS__/structure/"+data;
-                var structureSrc="<img src='"+structure+"' height='100' width='100'>";
+                var typeworks="__UPLOADS__/typeworks/"+data;
+                var typeworksSrc="<img src='"+typeworks+"' height='100' width='100'>";
                 //显示img_div
                 $("#img_div").show();
-                $("#structure_img").html(structureSrc);
+                $("#typeworks_img").html(typeworksSrc);
             }
         });
         $("#file_upload-button").removeAttr('style');
@@ -150,7 +150,7 @@
     function delimg() {
         /*var structure_img=$("#structure_img").find("img");
          var imgSrc=structure_img.attr("src");*/
-        var structureId={$rs.id};
+        var typeworksId={$rs.id};
         var imgSrc=$("input[name='img']").val();
         if(!imgSrc){
             layer.msg(' 请先上传图片！', {icon: 2});
@@ -170,8 +170,8 @@
             $.ajax({
                 type:"post",
                 dataType:"json",
-                data:{imgSrc:imgSrc,structureId:structureId},
-                url:"{:url('Structure/delimg')}",
+                data:{imgSrc:imgSrc,typeworksId:typeworksId},
+                url:"{:url('typeworks/delimg')}",
                 success:function(data){
                     if(data){
                         layer.msg(' 撤销图片成功！', {icon: 6});

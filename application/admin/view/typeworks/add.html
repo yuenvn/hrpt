@@ -39,7 +39,7 @@
                                                 <div  class="form-group">
                                                     <label class="col-sm-1 control-label">职务添加：</label>
                                                     <div class="form-submit">
-                                                        <input type="text" class="input-text" value="" placeholder="" id="position_name" name="positionname">
+                                                        <input type="text" class="input-text" value="" placeholder="" id="position_name" name="position">
                                                     </div>
                                                     <br>
 
@@ -47,7 +47,7 @@
                                                 <br class="form-group">
                                                 <label class="col-sm-1 control-label">职称添加：</label>
                                                 <div class="form-submit">
-                                                    <input type="text" class="input-text" value="" placeholder="" id="jobtitleid" name="jobtitlename">
+                                                    <input type="text" class="input-text" value="" placeholder="" id="jobtitleid" name="jobtitle">
                                                 </div>
                                                 <br>
 
@@ -66,10 +66,22 @@
                                                 <br>
 
                                                 </br>
+                                                    <br class="form-group">
+                                                    <label class="col-sm-1 control-label">底薪：</label>
+                                                    <div class="form-submit">
+                                                        <input type="text" class="input-text" value=" " placeholder="" id="basicsalaryid" name="basicsalary">
+                                                    </div>
+
+                                                    <br class="form-group">
+                                                    <label class="col-sm-1 control-label">全勤奖金：</label>
+                                                    <div class="form-submit">
+                                                        <input type="text" class="input-text" value="SG1-1" placeholder="" id="fullbonusid" name="fullbonus">
+                                                    </div>
+
                                                 <br class="form-group">
                                                 <label class="col-sm-1 control-label">等级选择：</label>
                                                 <div class="form-submit">
-                                                    <input type="text" class="input-text" value="SG1-1" placeholder="" id="levelid" name="levelname">
+                                                    <input type="text" class="input-text" value="" placeholder="" id="codelevelid" name="codelevel">
                                                 </div>
                                                 <br>
 
@@ -77,12 +89,11 @@
                                                 <br class="form-group">
                                                 <label class="col-sm-1 control-label">ABC等级选择：</label>
                                                 <div class="form-submit">
-                                                        <select id="abclevelid" name="abclevelname"  >
+                                                        <select id="abclevelid" name="abclevel"  >
                                                             <option>請選擇ABC：</option>
                                                             <option value="A">A级 </option> //选择"A级",系统返回值"A"
                                                             <option value="B">B级 </option>
                                                             <option value="C">C级 </option>
-
                                                         </select>
 <!--                                                    <input type="text" class="input-text" value="" placeholder="" id="abclevelid" name="abclevelname">-->
                                                 </div>
@@ -91,9 +102,9 @@
                                                     </br>
                                                     <br class="form-group">
 
-                                                    <label class="col-sm-1 control-label">ABC薪资：</label>
+                                                    <label class="col-sm-1 control-label">ABC效率奖金：</label>
                                                     <div class="form-submit">
-                                                        <input type="text" class="input-text" value="" placeholder="" id="abcsalaryid" name="abcsalaryname">
+                                                        <input type="text" class="input-text" value="" placeholder="" id="abcbonusid" name="abcbonus">
                                                     </div>
 
                                                     </div>
@@ -127,7 +138,7 @@
                                                     <div class="col-sm-2">
                                                         <select id="province" name="pid" class="form-control m-b help-block m-b-none" required="" aria-required="true">
                                                          {foreach $typeworks as $vo}
-                                                            <option value="{$vo.id}" >{$vo.level}级&nbsp;{$vo.positionname}</option>
+                                                            <option value="{$vo.id}" >{$vo.level}级&nbsp;{$vo.position}</option>
                                                             {/foreach}
 
                                                         </select>
@@ -196,12 +207,12 @@ div.remove();
 <!-- layer -->
 <script src="__PLUS__/layer/layer.js"></script>
 <script type="text/javascript">
-    if($("select[name=pid]").find("option:selected").val() !=0){
-        changeTemplate();
-    }
-    $("select[name=pid]").change(function(){
-        changeTemplate();
-    });
+    // if($("select[name=pid]").find("option:selected").val() !=0){
+    //     changeTemplate();
+    // }
+    // $("select[name=pid]").change(function(){
+    //     changeTemplate();
+    // });
 
 
 

@@ -38,7 +38,10 @@
                                                 <th ><input type='checkbox' id='chkAll' onclick="checkAll(this.checked)" ></th>
                                                 <!--<th data-field="id" data-visible="false">ID</th>-->
                                                 <th>伸缩</th>
-                                                <th>组织名称</th>
+                                                <th>职务名称</th>
+                                                <th>职位等级</th>
+                                                <th>ABC等级</th>
+                                                <th>底薪</th>
                                                 <th>排序</th>
                                                 <th>操作</th>
                                             </tr>
@@ -50,8 +53,17 @@
 
                                                 <td width="5%"><a  class="showHide btn btn-xs btn-outline btn-warning" style="font-size: 14px; font-weight: bold" >+</a></td>
                                                 <td >
-                                                    <?php echo str_repeat(' ∷ ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="{:url('Content/lists',['typeworks_id'=>$value['id']])}">{$value.positionname}</a>
+                                                    <?php echo str_repeat(' ——— ',$value['level']*1);  ?><a title="点击可查看组织文档并添加该组织文档" href="{:url('Content/lists',['typeworks_id'=>$value['id']])}">{$value.position."--".$value.jobtitle}</a>
                                                     <a style="float: right;" class="btn btn-outline btn-rounded btn-sm btn-success" href="{:url('add',array('id'=>$value.id))}">添加子组织</a>  <!--增加-->
+                                                </td>
+                                                <td >
+                                                    <a> {$value.codelevel}</a>
+                                                </td>
+                                                <td >
+                                                    <a> {$value.abclevel}</a>
+                                                </td>
+                                                <td >
+                                                    <a>{$value.basicsalary}</a>
                                                 </td>
                                                 <td width="13%">
                                                     <input class="form-control" type="number" valid="{$value.id}"  name="sort" value="{$value.sort}" onchange="change(this);">
@@ -94,6 +106,7 @@
     <!-- layer -->
     <script src="__PLUS__/layer/layer.js"></script>
 
+
     <script type="text/javascript">
         //伸缩
         $('tr[pid!=0]').hide();
@@ -111,6 +124,7 @@
                     data:{id:id},
                     url:"{:url('Typeworks/isShowHidden')}",
                     success:function(data){
+                        console.log(data)
                         var sonids=[];
                         var idsobj=$('tr[pid!=0]');
                         //数组遍历
@@ -119,6 +133,9 @@
                         });
                         //json的遍历
                         $.each(data,function(k,v){
+                            // if(k == "basicsalary"){
+                            //     data[k]= formatCash(v)
+                            // }
                             if($.inArray(v,sonids)){
                                 $('tr[id='+v+']').hide();
                                 $('tr[id='+v+']').find('a:first').text('+');
@@ -181,6 +198,7 @@
                 }
             });
         }
+
 
         //删除
         function dele(object){

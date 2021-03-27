@@ -7,11 +7,11 @@ use think\Model;
 class Typeworks extends Model
 {
  //越盾分隔符
-    public function currency_format($number, $suffix = 'đ') {
+    public function currency_format($number, $suffix = 'đ')  //这个是函数
+    {
                 if (!empty($number)) {
                     return number_format($number, 0, ',', '.') . "{$suffix}";
                 }
-
     }
 
     public function catetree($cateRes){  //排序
@@ -34,19 +34,19 @@ class Typeworks extends Model
         }
         return $arr;
     }
-    public function childrenids($structureid){
-        $data=$this->field('id,pid')->select();
-        return $this->_childrenids($data,$structureid);
+    public function childrenids($typeworksid){
+        $data=$this->field('id,pid')->select();  //查询id和pid的值
+        return $this->_childrenids($data,$typeworksid); //返回data 和
     }
-    private function _childrenids($data,$structureid){
-        static $arr=array();
-        foreach ($data as $k=>$v){
-            if($v["pid"]==$structureid){
-                $arr[]=$v["id"];
-                $this->_childrenids($data,$v["id"]);
+    private function _childrenids($data,$typeworksid){
+        static $arr=array();  //把array的值赋给arr
+        foreach ($data as $k=>$v){ //循环取值
+            if($v["pid"]==$typeworksid){  //取pid的值
+                $arr[]=$v["id"];  //取id的值
+                $this->_childrenids($data,$v["id"]); //用childrenids取data,$v[数组的值]
             }
         }
-        return $arr;
+        return $arr; //返回一个数组
     }
 
 }
