@@ -13,6 +13,55 @@
     <link href="__ADMIN__/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <!--uploadify文件引入CSS-->
    <!-- <link rel="stylesheet" type="text/css" href="__PLUS__/uploadify/uploadify.css" />-->
+    <style type="text/css">
+        body{
+            margin:0;
+            padding:0;
+
+        }
+
+        #margin {
+            width: 200px;
+            color: darksalmon;
+            background-color: black;
+
+            margin-left: auto;
+            margin-right: auto;
+            /*auto是自动，这里会直接设置居中模式，自动设置左右外边距来使内部元素达到居中的效果*/
+        }
+
+        #position{
+            width: 200px;
+            color: darksalmon;
+            background-color: black;
+
+            position: absolute;
+            right:0px;
+            /*设置 绝对位置模式来定位,使用绝对定位模式之后，原先占据的空间会消失，与float一样*/
+            z-index: -1;
+            outline: red solid 10px;
+            border: green solid 5px;
+        }
+
+        #float{
+            width: 300px;
+            color: darksalmon;
+            background-color: black;
+            float:right;
+            /*设置float:right 属性后原先占据的空间也会消失。*/
+
+            position: relative;
+            top: 100px;
+            /*这里再次做了一个相对定位，是为了相对于浮动之后不被遮挡再向下移动。
+             不知道为什么这里没设置相对定位之前会被position遮挡，可能是浮动会被定位遮挡。
+             （在这把z-index=1 不管用，但是给position一个-1就管用了,就解决了遮挡问题）
+             做了相对定位之后就没了遮挡问题。
+
+              为了向下移动还可以加一个margin-top
+            */
+        }
+
+    </style>
 </head>
 
 <body class="gray-bg">
@@ -51,6 +100,51 @@
                                                     <label class="col-sm-1 control-label">职位名称</label>
                                                     <div class="col-sm-11">
                                                         <input  name="position" value="{$rs.position}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">职称名称</label>
+                                                    <div class="col-sm-11">
+                                                        <input  name="jobtitle" value="{$rs.jobtitle}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <label class="col-sm-1 control-label">年资选择：</label>
+                                                    <div class="col-sm-11">
+                                                        <select id="workingageid" name="workingage">
+                                                            <option>請選擇年资：</option>
+                                                            <option value="2">2年内 </option> //选择"2年内",系统返回值"2"
+                                                            <option value="5">2年-5年</option>
+                                                            <option value="7">5年以上</option>
+                                                        </select>
+                                                    </div>
+                                                    </div>
+
+                                                    <label class="col-sm-1 control-label">职位等级</label>
+                                                    <div class="col-sm-11">
+                                                        <input  name="level" value="{$rs.level}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">底薪</label>
+                                                    <div class="col-sm-11">
+                                                        <input  name="basicsalary" value="{$rs.basicsalary}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">全勤奖金：</label>
+                                                    <div class="col-sm-11">
+                                                        <input  name="fullbonus" value="{$rs.fullbonus}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                    <label class="col-sm-1 control-label">ABC等级选择：</label>
+                                                    <div class="form-submit">
+                                                        <select id="abclevelid" name="abclevel"  >
+                                                            <option>請選擇ABC：</option>
+                                                            <option value="A">A级 </option> //选择"A级",系统返回值"A"
+                                                            <option value="B">B级 </option>
+                                                            <option value="C">C级 </option>
+                                                        </select>
+                                                    </div>
+                                                    </div>
+
+                                                    <label class="col-sm-1 control-label">ABC奖金</label>
+                                                    <div class="col-sm-11">
+                                                        <input  name="abcbonus" value="{$rs.abcbonus}" minlength="1" maxlength="20" type="text" class="form-control " required="" aria-required="true">
                                                     </div>
                                                 </div>
 
@@ -91,14 +185,6 @@
 <script type="text/javascript" src="__PLUS__/ueditor/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
 <script type="text/javascript" src="__PLUS__/ueditor/ueditor.all.js"></script>
-<!-- 实例化编辑器 -->
-<script type="text/javascript">
-    var ue = UE.getEditor('container',{initialFrameHeight:400});
-    toolbars: [
-        ['fullscreen', 'source', 'undo', 'redo'],
-        ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
-    ]
-</script>
 <!--uploadify文件引入js-->
 <script type="text/javascript" src="__PLUS__/uploadify/jquery.uploadify.min.js"></script>
 <!-- layer -->

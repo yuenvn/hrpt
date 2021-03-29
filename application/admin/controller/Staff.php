@@ -133,7 +133,7 @@ class Staff extends Common
             if(!$validate->check($data)){
                 $this->error($validate->getError());
             }
-            $data['birthday'] = strtotime($data['birthday']);
+            $data['birthday'] = strtotime($data['birthday']);  //转化时间
             $data['entrydate'] = strtotime($data['entrydate']);
             $data['update_time'] = time();
             if ($_FILES['photo']['tmp_name']) {

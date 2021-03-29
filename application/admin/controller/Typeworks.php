@@ -91,7 +91,7 @@ class Typeworks extends Common
           $this->error('添加失败','add');
       }
   }
-    public function edit()
+    public function edit($id)  //$id是带入的id,指当前选择的编辑项带入的id
     {
         if(request()->isPost()){
             $data=input('post.');
@@ -100,21 +100,21 @@ class Typeworks extends Common
                 $_data[]=$k;
             }
 
-            $validate=validate('typeworks');
-            if(!$validate->scene('edit')->check($data)){
-                $this->error($validate->getError());
+            $validate=validate('typeworks'); //验证环节
+            if(!$validate->scene('edit')->check($data)){ //如果验证环节错误
+                $this->error($validate->getError());  //提示错误
             }
-            if($data['id']==$data['pid']){
+            if($data['id']==$data['pid']){  //如果id和pid相同,提示错误
                 $this->error("选择错误，当前与上级组织相同！");
             }
-            $edit=db('typeworks')->where('id',$id)->update($data);
+            $edit=db('typeworks')->where('id',$id)->update($data); //查询当前选择项的id,更新$data
             if($edit){
                 $this->success("修改组织成功",url('lists'));
             }else{
                 $this->error("修改组织失败");
             }
         }
-        //获取组织
+
         $id=input('id');
         $typeworks=Loader::model('typeworks')->catetreeadd();
         $rs=db('typeworks')->find($id);

@@ -6,7 +6,7 @@ use yuntongxin\smsMobile;
 
 $request=Request::instance();
 //请求对象的属性注入
-$request->siteName='爱之情人事系统V6.00';
+$request->siteName='富寿人事系统V1.00';
 
 //获取全站配置列表
 function confs()
