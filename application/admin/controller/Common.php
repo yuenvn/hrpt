@@ -123,7 +123,19 @@ class Common extends Controller{
         }
     }
 
-    //取数据
+    //getLevelPosition
+    //getJobtitleInfo
+    public function getPositionInfo($pid=0,$level=1)  //获取职位信息
+    {
+        $positionRes=model('typeworks')->getLevelPosition($pid,$level);
+        if($pid==0){
+            return $positionRes;
+        }else{
+            echo json_encode($positionRes);
+        }
+    }
+
+    //取职位数据
     public function getJobsInfo($pid=0)  //获取职位信息
     {
         $jobsRes=model('jobs')->getJobsLevel($pid);

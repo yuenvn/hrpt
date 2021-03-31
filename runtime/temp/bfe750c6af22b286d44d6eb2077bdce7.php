@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\code\hrsystem\public/../application/admin\view\staff\add.html";i:1616387553;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\code\hrsystem\public/../application/admin\view\staff\add.html";i:1617176428;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,18 +177,38 @@
                                                 </div>
 
                                                 <div class="form-group">
-
                                                     <label class="col-sm-1 control-label">社会关系：</label>
                                                     <div class="col-sm-3">
                                                         <input  name="gam" type="text" minlength="2" maxlength="50" class="form-control " required="" aria-required="true">
                                                     </div>
-
                                                     <label class="col-sm-1 control-label">健康状况：</label>
                                                     <div class="col-sm-3">
                                                         <input  name="health" type="text" minlength="2" maxlength="30" class="form-control " required="" aria-required="true">
                                                     </div>
-
                                                 </div>
+
+<!--                                                    职位选择-->
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">职位：</label>
+                                                        <div class="col-sm-2">
+                                                            <select id="position" name="native_position" class="form-control m-b help-block m-b-none" required="" aria-required="true">
+                                                                <option value="">请选择职位</option>
+                                                                <?php if(is_array($positionRes) || $positionRes instanceof \think\Collection || $positionRes instanceof \think\Paginator): $i = 0; $__LIST__ = $positionRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$positions): $mod = ($i % 2 );++$i;?>
+                                                                <option value="<?php echo $positions['id']; ?>"><?php echo $positions['position']; ?></option>
+                                                                <?php endforeach; endif; else: echo "" ;endif; ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+<!--                                                            职称-->
+                                                            <select id="jobtitle" name="native_jobtitle"  style="display: none;" class="form-control m-b help-block m-b-none" aria-required="true" required=""></select>
+                                                        </div>
+<!--                                                        职位等级-->
+                                                        <div class="col-sm-2">
+                                                            <select id="codelevel" name="native_codelevel" style="display: none;" class="form-control m-b help-block m-b-none" aria-required="true">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+<!--                                                    职位选择-->
 
                                                 <div class="form-group">
                                                     <label class="col-sm-1 control-label">籍贯：</label>
@@ -274,6 +294,7 @@
 <!-- layer -->
 <script src="/static/plus/layer/layer.js"></script>
 <script src="/static/plus/js/getaddress.js"></script>
+<script src="/static/plus/js/getposition.js"></script>
 <script src="/static/admin/js/plugins/layer/laydate/laydate.js"></script>
 
 <script>
@@ -300,8 +321,6 @@
             div.remove();
         }
     }
-
-
 
 </script>
 

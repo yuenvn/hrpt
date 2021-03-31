@@ -49,6 +49,16 @@ class Typeworks extends Model
         return $arr; //返回一个数组
     }
 
+    public function getLevelPosition($pid=0,$level=1)  //获取城市信息
+    {
+        return self::where(['pid'=>$pid,'level'=>$level])->select(); //level,1级城市,level2级城市,upid为父id,子id继承父id实现城市
+    }
+
+    public function getPositionInfo($id)   //返回职称信息
+    {
+        return $this->field('position')->where(['id'=>$id])->find()['position'];
+    }
+
 }
 
 

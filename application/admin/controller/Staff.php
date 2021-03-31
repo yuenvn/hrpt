@@ -70,7 +70,9 @@ class Staff extends Common
         $jobsRes=$this->getJobsInfo($pid=0);
         //初始化获得省份信息
         $provinceRes=$this->getCityInfo($pid=0,$level=1);
-        //初始化获得职位信息
+        //初始化职位信息
+        $positionRes=$this->getPositionInfo($pid=0,$level=1);
+
 
         if(request()->isPost()){
             $data=input('post.');
@@ -114,7 +116,10 @@ class Staff extends Common
             return;
         }
         $this->assign([
-            'provinceRes'=>$provinceRes,'jobsRes'=>$jobsRes,'structureRes'=>$structureRes,
+            'provinceRes'=>$provinceRes,
+            'jobsRes'=>$jobsRes,
+            'structureRes'=>$structureRes,
+            'positionRes'=>$positionRes,
         ]);
         return view();
     }
