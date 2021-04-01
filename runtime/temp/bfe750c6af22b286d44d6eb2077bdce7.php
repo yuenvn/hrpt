@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\code\hrsystem\public/../application/admin\view\staff\add.html";i:1617176428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\code\hrsystem\public/../application/admin\view\staff\add.html";i:1617267044;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>

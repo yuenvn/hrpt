@@ -68,11 +68,9 @@ class Staff extends Common
         $structureRes=$this->getStrucInfo($pid=1);
         //初始化获得部门信息
         $jobsRes=$this->getJobsInfo($pid=0);
-        //初始化获得省份信息
-        $provinceRes=$this->getCityInfo($pid=0,$level=1);
-        //初始化职位信息
-        $positionRes=$this->getPositionInfo($pid=0,$level=1);
 
+        $provinceRes=$this->getCityInfo($pid=0,$level=1); //初始化获得省份信息
+        $positionRes=$this->getjobtitleInfo($pid=0,$level=1); //初始化职位信息
 
         if(request()->isPost()){
             $data=input('post.');
@@ -91,6 +89,8 @@ class Staff extends Common
             // 添加操作 strict(false) 过滤该表不存在的字段
             $newSId=db('staff')->strict(false)->insertGetId($data);
 
+
+            //-----------培训操作-----------------
             if($newSId){
                 //培训记录操作
                 if($data['training_info']){
@@ -217,6 +217,7 @@ class Staff extends Common
         }else{
             $countyRes=[];
         }
+
         $this->assign([
             'rs'=>$rs,
             'training'=>$training,
