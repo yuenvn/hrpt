@@ -74,8 +74,11 @@ class Typeworks extends Common
       //var_dump($_POST);
   //    $data=input('post.');
       $data=input('post.');
+  //    $data['jobtitle']=$data['position'];
 
-//      $data['name']=$data['name'];
+      //dump($data['position']=$data["jobtitle"]);
+      //die();
+
 //      $data['pid']=$data['pid'];
 //      $data['name'];
 //      $data['pid'];

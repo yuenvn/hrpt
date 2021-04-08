@@ -54,9 +54,9 @@ class Typeworks extends Model
         return self::where(['pid'=>$pid,'level'=>$level])->select(); //level,1级城市,level2级城市,upid为父id,子id继承父id实现城市
     }
 
-    public function getjobtitleInfo($id)   //返回职称信息
+    public function getjobtitleInfo($id)   //返回id 整列信息
     {
-        return $this->field('position')->where(['id'=>$id])->find()['jobtitle'];
+        return $this->field('position')->where(['id'=>$id])->find()['position'];
     }
 
 }

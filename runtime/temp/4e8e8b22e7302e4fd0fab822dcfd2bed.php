@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"E:\code\hrsystem\public/../application/admin\view\typeworks\add.html";i:1617873299;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>添加组织</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="__ADMIN__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="__ADMIN__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 
-    <link href="__ADMIN__/css/animate.css" rel="stylesheet">
-    <link href="__ADMIN__/css/style.css?v=4.1.0" rel="stylesheet">
-    <link href="__ADMIN__/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="/static/admin/css/animate.css" rel="stylesheet">
+    <link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <!--uploadify文件引入CSS-->
-   <!-- <link rel="stylesheet" type="text/css" href="__PLUS__/uploadify/uploadify.css" />-->
+   <!-- <link rel="stylesheet" type="text/css" href="/static/plus/uploadify/uploadify.css" />-->
 </head>
 
 <body class="gray-bg">
@@ -31,7 +32,7 @@
                                 </div>
 
                                 <div class="panel-body">
-                                    <form action="{:url('adddata')}" class="form-horizontal m-t" id="commentForm" method="post"  enctype="multipart/form-data">
+                                    <form action="<?php echo url('adddata'); ?>" class="form-horizontal m-t" id="commentForm" method="post"  enctype="multipart/form-data">
 
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
@@ -112,9 +113,9 @@
                                                     <label class="col-sm-1 control-label">职务分类：</label>
                                                     <div class="col-sm-2">
                                                         <select id="province" name="pid" class="form-control m-b help-block m-b-none" required="" aria-required="true" >
-                                                         {foreach $typeworks as $vo}
-                                                            <option value="{$vo.id}" >{$vo.level}级&nbsp;{$vo.position}</option>
-                                                            {/foreach}
+                                                         <?php foreach($typeworks as $vo): ?>
+                                                            <option value="<?php echo $vo['id']; ?>" ><?php echo $vo['level']; ?>级&nbsp;<?php echo $vo['position']; ?></option>
+                                                            <?php endforeach; ?>
 
                                                         </select>
                                                     </div>
@@ -134,7 +135,7 @@
                                             <div class="col-sm-3 col-sm-offset-1">
                                                 <button class="btn btn-primary" type="submit" >提交</button>
                                                 <button style="margin-left: 15px;" class="btn btn-default" type="reset" >重置</button>
-                                                <a style="margin-left: 15px;" class="btn btn-info" href="{:url('add')}">刷新</a>
+                                                <a style="margin-left: 15px;" class="btn btn-info" href="<?php echo url('add'); ?>">刷新</a>
                                             </div>
                                         </div>
                                     </form>
@@ -148,23 +149,23 @@
     </div>
 </div>
 <!-- 全局js -->
-<script src="__ADMIN__/js/jquery.min.js?v=2.1.4"></script>
-<script src="__ADMIN__/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 <!-- 自定义js -->
-<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+<script src="/static/admin/js/content.js?v=1.0.0"></script>
 
 <!-- jQuery Validation plugin javascript-->
-<script src="__ADMIN__/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="__ADMIN__/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/static/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/static/admin/js/plugins/validate/messages_zh.min.js"></script>
 
-<script src="__ADMIN__/js/demo/form-validate-demo.js"></script>
+<script src="/static/admin/js/demo/form-validate-demo.js"></script>
 
 
 <!--百度编辑器-->
 <!-- 配置文件 -->
-<script type="text/javascript" src="__PLUS__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/static/plus/ueditor/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
-<script type="text/javascript" src="__PLUS__/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/static/plus/ueditor/ueditor.all.js"></script>
 <script>
 function addabcsalary(o){
 var div=$(o).parent().parent();
@@ -178,9 +179,9 @@ div.remove();
 }
 </script>
 <!--uploadify文件引入js-->
-<script type="text/javascript" src="__PLUS__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="/static/plus/uploadify/jquery.uploadify.min.js"></script>
 <!-- layer -->
-<script src="__PLUS__/layer/layer.js"></script>
+<script src="/static/plus/layer/layer.js"></script>
 <script type="text/javascript">
     // if($("select[name=pid]").find("option:selected").val() !=0){
     //     changeTemplate();

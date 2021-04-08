@@ -70,7 +70,8 @@ class Staff extends Common
         $jobsRes=$this->getJobsInfo($pid=0);
 
         $provinceRes=$this->getCityInfo($pid=0,$level=1); //初始化获得省份信息
-        $positionRes=$this->getjobtitleInfo($pid=0,$level=1); //初始化职位信息
+        $positionRes=$this->getjobtitleInfo($pid=0,$level=1); //点击职位信息后获取职称的值  ->common getjobtitleInfo
+        $jobtitleRes=$this->getjobtitleInfo($pid=0,$level=1); //点击职位信息后获取职称的值  ->common getjobtitleInfo
 
         if(request()->isPost()){
             $data=input('post.');
@@ -120,6 +121,7 @@ class Staff extends Common
             'jobsRes'=>$jobsRes,
             'structureRes'=>$structureRes,
             'positionRes'=>$positionRes,
+            'jobtitleRes'=>$jobtitleRes,
         ]);
         return view();
     }
@@ -194,6 +196,21 @@ class Staff extends Common
 //            $structureRes=[];
 //        }
 
+        $positionRes=$this->getjobtitleInfo($pid=0,$level=1); //初始化职位信息
+        if($rs['native_position']){ //取html,native_province的值,跳进入城市选项
+            $jobtitleRes=model('typeworks')->getLevelPosition($rs['native_position'],2);
+        }else{
+            $jobtitleRes=[];
+        }
+
+        //如果有城市信息，则调取区县
+        if($rs['native_jobtitle']){
+            $codelevelRes=model('typeworks')->getLevelPosition($rs['native_jobtitle'],3);
+        }else{
+            $codelevelRes=[];
+        }
+
+
         //初始化职位信息
         $jobsRes=$this->getJobsInfo($pid=0);
 //        if($jors['works_jobs']){ //取html,native_province的值,跳进入城市选项
@@ -228,6 +245,9 @@ class Staff extends Common
             'jors'=>$jors,
             'jobsRes'=>$jobsRes,
             'structureRes'=>$structureRes,
+            'positionRes'=>$positionRes,
+            'jobtitleRes'=>$jobtitleRes,
+            'codelevelRes'=>$codelevelRes,
         ]);
         return view();
     }

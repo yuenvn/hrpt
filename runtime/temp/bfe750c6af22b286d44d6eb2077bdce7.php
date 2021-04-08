@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\code\hrsystem\public/../application/admin\view\staff\add.html";i:1617267044;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\code\hrsystem\public/../application/admin\view\staff\add.html";i:1617857397;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -199,7 +199,6 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-2">
-<!--                                                            职称-->
                                                             <select id="jobtitle" name="native_jobtitle"  style="display: none;" class="form-control m-b help-block m-b-none" aria-required="true" required=""></select>
                                                         </div>
 <!--                                                        职位等级-->
@@ -299,6 +298,7 @@
 
 <script>
     var send_url="<?php echo $url_root; ?>/admin/staff/getCityInfo";
+    var send_urlposition="<?php echo $url_root; ?>/admin/staff/getjobtitleInfo";  //定义js中 send_url
     var ismobile=false;
     $('input[name="photo"]').prettyFile();
     //外部js调用
